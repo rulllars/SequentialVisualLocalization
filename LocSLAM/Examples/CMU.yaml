@@ -1,0 +1,218 @@
+%YAML:1.0
+
+#--------------------------------------------------------------------------------------------
+# Data paths
+#--------------------------------------------------------------------------------------------
+Data.LoadBasePath: "../Data/Sequential-CMU-Seasons"
+#01
+#Data.SequenceFolder: data_collection_20100901
+#02
+#Data.SequenceFolder: data_collection_20100915
+#03
+# Data.SequenceFolder: data_collection_20101001
+#04
+#Data.SequenceFolder: data_collection_20101019
+#05
+#Data.SequenceFolder: data_collection_20101028
+#06
+#Data.SequenceFolder: data_collection_20101103
+#07
+#Data.SequenceFolder: data_collection_20101112
+#08
+#Data.SequenceFolder: data_collection_20101122
+#09
+#Data.SequenceFolder: data_collection_20101221
+#10
+#Data.SequenceFolder: data_collection_20110304
+#12
+Data.SequenceId: 3    # Select the sequence number from the list above to use
+Data.ImageFileList: imagesToRun.txt
+
+#--------------------------------------------------------------------------------------------
+# Image load parameters
+#--------------------------------------------------------------------------------------------
+
+# Start reading images with an offset
+Load.Offset: 0
+
+# Specify number of frames to load (-1 -> loads all)
+Load.nFrames: -1
+
+#--------------------------------------------------------------------------------------------
+# Camera Parameters. Adjust them!
+#--------------------------------------------------------------------------------------------
+
+# The number of cameras in the rig
+nCameras: 2
+
+# List supported cameras
+supportedCameras: !!opencv-matrix
+  rows: 2
+  cols: 1
+  dt: i
+  data: [1, 1]
+# Intrinsic and extrinsic for each camera
+
+Camera.fps: 10
+Camera.width: 1024
+Camera.height: 768
+
+#--------------------------------------------------------------------------------------------
+# Camera 0
+#--------------------------------------------------------------------------------------------
+# Camera calibration and distortion parameters (OpenCV)
+Camera0.fx: 868.993378
+Camera0.fy: 866.063001
+Camera0.cx: 525.942323
+Camera0.cy: 420.042529
+
+Camera0.k1: -0.399431
+Camera0.k2: 0.188924
+Camera0.p1: 0.000153
+Camera0.p2: 0.000571
+
+# Camera extrinsic: Active transformation from body to camera frame, Pbw = Tbc * Pcw
+# Set to eye(4) for single camera systems without IMU
+Camera0.Tcb: !!opencv-matrix
+  rows: 4
+  cols: 4
+  dt: f
+  data: [0.694419386916590,  -0.719307011097452,  -0.019471488398092,   0.638193649803905, 0.002011605275699,   0.029000352677476,  -0.999577377189378,  -0.026117905750849, 0.719567695577422,   0.694086740494754,   0.021585368905029,  -0.634000415635525, 0,                   0,                   0,   1.000000000000000]
+
+# Camera frames per second
+Camera0.fps: 10.0
+
+# Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
+Camera0.RGB: 1
+
+#--------------------------------------------------------------------------------------------
+# Camera 1
+#--------------------------------------------------------------------------------------------
+# Camera calibration and distortion parameters (OpenCV)
+Camera1.fx: 873.382641
+Camera1.fy: 876.489513
+Camera1.cx: 529.324138
+Camera1.cy: 397.272397
+
+Camera1.k1: -0.397066
+Camera1.k2: 0.181925
+Camera1.p1: 0.000176
+Camera1.p2: -0.000579
+
+# Camera extrinsic: Active transformation from body to camera frame, Pbw = Tbc * Pcw
+# Set to eye(4) for single camera systems without IMU
+Camera1.Tcb: !!opencv-matrix
+  rows: 4
+  cols: 4
+  dt: f
+  data: [-0.697629022722097,  -0.715146096868552,  -0.043356738686023,  -0.652690056446811, 0.014699379060970,   0.046215743278901,  -0.998823324381444,   0.041779680423758, 0.716308365797185,  -0.697445456797056,  -0.021729240256191,  -0.618257514089157, 0,                   0,                   0,   1.000000000000000]
+
+# Camera frames per second
+Camera1.fps: 10.0
+
+# Color order of the images (0: BGR, 1: RGB. It is ignored if images are gray scale)
+Camera1.RGB: 1
+
+#--------------------------------------------------------------------------------------------
+# Tracking parameters
+#--------------------------------------------------------------------------------------------
+
+# Select bias level on odometry signal 01 (small) -> 05 (big)
+Data.OdometryFile: Odometry/measurements_bias01.txt
+#Data.OdometryFile: Odometry/measurements_bias02.txt
+#Data.OdometryFile: Odometry/measurements_bias05.txt
+
+# Time compensate velocity to account for non-uniform sampling
+Tracking.TrackWithOdometry: 1
+
+#Odometry motion model parameters
+Tracking.OdoPredictTransUncertainty: 0.04
+
+# Bias 1 (match to selected odometry bias above)
+Tracking.OdoPredictAngleUncertainty: 0.02
+
+# Bias 2  (match to selected odometry bias above)
+#Tracking.OdoPredictAngleUncertainty: 0.0282843
+
+# Bias 5  (match to selected odometry bias above)
+#Tracking.OdoPredictAngleUncertainty: 0.0447214
+
+#--------------------------------------------------------------------------------------------
+# Global map parameters
+#--------------------------------------------------------------------------------------------
+FixedMap.UseFixedMap: 1
+
+FixedMap.CorrespondencePath: inliers
+FixedMap.PosePath: poses
+FixedMap.PoseSuffix: ".pose.txt"
+FixedMap.MinInterval: 1.0
+
+# 1) Select type of local feature (D2-net or SIFT)
+
+### D2-net
+
+# 2) the level of pre-processed matches (use one)
+FixedMap.BasePath: ../Data/Sequential-CMU-Seasons/FixedMap/d2-net/smoothed_verified_matches
+#FixedMap.BasePath: ../Data/Sequential-CMU-Seasons/FixedMap/d2-net/smoothed_matches
+#FixedMap.BasePath: ../Data/Sequential-CMU-Seasons/FixedMap/d2-net/single_img_matches
+
+FixedMap.CorrespondenceSuffix: ".d2-inliers.txt"
+FixedMap.SigmaFeature: 6.0 # in pixels
+FixedMap.SampleRatio: 0.3 # Subsample ratio for fixed map matches. Strive to make local and fix map of similar size.
+FixedMap.SigmaPriorPos: 0.25 # in meters
+FixedMap.sigmaPriorHead: 0.7 # in degrees
+
+### SIFT
+
+# 2) Select the level of pre-processed matches (use one)
+#FixedMap.BasePath: ../Data/Sequential-CMU-Seasons/FixedMap/sift/smoothed_verified_matches
+#FixedMap.BasePath: ../Data/Sequential-CMU-Seasons/FixedMap/sift/smoothed_matches
+
+#FixedMap.CorrespondenceSuffix: ".inliers.txt"
+#FixedMap.SigmaFeature: 3.0 # in pixels
+#FixedMap.SampleRatio: 1.1 # Set to > 1 to ensure all points are used.
+#FixedMap.SigmaPriorPos: 0.2 # in meters
+#FixedMap.sigmaPriorHead: 0.7 # in degrees
+
+
+
+
+#--------------------------------------------------------------------------------------------
+# ORB Parameters
+#--------------------------------------------------------------------------------------------
+
+# ORB Extractor: Number of features per image
+ORBextractor.nFeatures: 2000
+
+# ORB Extractor: Scale factor between levels in the scale pyramid
+ORBextractor.scaleFactor: 1.2
+
+# ORB Extractor: Number of levels in the scale pyramid
+ORBextractor.nLevels: 8
+
+# ORB Extractor: Fast threshold
+# Image is divided in a grid. At each cell FAST are extracted imposing a minimum response.
+# Firstly we impose iniThFAST. If no corners are detected we impose a lower value minThFAST
+# You can lower these values if your images have low contrast
+ORBextractor.iniThFAST: 20
+ORBextractor.minThFAST: 7
+
+
+#--------------------------------------------------------------------------------------------
+# Viewer Parameters
+#--------------------------------------------------------------------------------------------
+Viewer.UseViewer: 1
+Viewer.KeyFrameSize: 0.1
+Viewer.KeyFrameLineWidth: 1
+Viewer.GraphLineWidth: 1
+Viewer.PointSize: 2
+Viewer.CameraSize: 0.15
+Viewer.CameraLineWidth: 2
+Viewer.ViewpointX: 0
+Viewer.ViewpointY: -10
+Viewer.ViewpointZ: -0.1
+Viewer.ViewpointF: 500
+Viewer.ImageScale: 0.7
+Viewer.RecordVideo: 0  # Set to 1 to record video of the results
+Viewer.RecordVideoCameraSuffix: ".video.mp4" 
+Viewer.RecordVideoMapSuffix: ".map.mp4" 

@@ -1,0 +1,97 @@
+Configure summary
+
+Build type:    linux-g++ (x86_64, CPU features: mmx sse sse2)
+Platform notes:
+
+            - Also available for Linux: linux-kcc linux-icc linux-cxx
+        
+Build options:
+  Configuration .......... accessibility audio-backend avx avx2 c++11 clock-gettime clock-monotonic compile_examples concurrent debug evdev eventfd freetype full-config getaddrinfo getifaddrs iconv inotify ipv6ifname large-config largefile linuxfb medium-config minimal-config mremap nis no-harfbuzz no-pkg-config opengl pcre png posix_fallocate precompile_header private_tests qpa qpa reduce_exports reduce_relocations rpath shared small-config sse2 sse3 sse4_1 sse4_2 ssse3 warnings_are_errors xcb xcb-plugin xcb-qt xcb-xlib xkbcommon-qt xlib zlib 
+  Build parts ............ libs tools
+  Mode ................... debug
+  Using C++11 ............ yes
+  Using PCH .............. yes
+  Target compiler supports:
+    SSE2/SSE3/SSSE3 ...... yes/yes/yes
+    SSE4.1/SSE4.2 ........ yes/yes
+    AVX/AVX2 ............. yes/yes
+
+Qt modules and options:
+  Qt D-Bus ............... no
+  Qt Concurrent .......... yes
+  Qt GUI ................. yes
+  Qt Widgets ............. yes
+  Large File ............. yes
+  QML debugging .......... yes
+  Use system proxies ..... no
+
+Support enabled for:
+  Accessibility .......... yes
+  ALSA ................... no
+  CUPS ................... no
+  Evdev .................. yes
+  FontConfig ............. no
+  FreeType ............... yes (bundled copy)
+  Glib ................... no
+  GTK theme .............. no
+  HarfBuzz ............... no
+  Iconv .................. yes
+  ICU .................... no
+  Image formats: 
+    GIF .................. yes (plugin, using bundled copy)
+    JPEG ................. yes (plugin, using bundled copy)
+    PNG .................. yes (in QtGui, using bundled copy)
+  journald ............... no
+  mtdev .................. no
+  Networking: 
+    getaddrinfo .......... yes
+    getifaddrs ........... yes
+    IPv6 ifname .......... yes
+    OpenSSL .............. no
+  NIS .................... yes
+  OpenGL / OpenVG: 
+    EGL .................. no
+    OpenGL ............... desktop
+    OpenVG ............... no
+  PCRE ................... yes (bundled copy)
+  pkg-config ............. no 
+  PulseAudio ............. no
+  QPA backends: 
+    DirectFB ............. no
+    EGLFS ................ no
+    KMS .................. no
+    LinuxFB .............. yes
+    XCB .................. yes (bundled copy)
+      EGL on X ........... no
+      GLX ................ no
+      MIT-SHM ............ yes
+      Xcb-Xlib ........... yes
+      Xcursor ............ yes (loaded at runtime)
+      Xfixes ............. yes (loaded at runtime)
+      Xi ................. yes (loaded at runtime)
+      Xi2 ................ no
+      Xinerama ........... yes (loaded at runtime)
+      Xrandr ............. yes (loaded at runtime)
+      Xrender ............ no
+      XKB ................ yes
+      XShape ............. yes
+      XSync .............. yes
+      XVideo ............. yes
+  Session management ..... yes
+  SQL drivers: 
+    DB2 .................. no
+    InterBase ............ no
+    MySQL ................ no
+    OCI .................. no
+    ODBC ................. no
+    PostgreSQL ........... no
+    SQLite 2 ............. no
+    SQLite ............... yes (plugin, using bundled copy)
+    TDS .................. no
+  udev ................... no
+  xkbcommon .............. yes (bundled copy, XKB config root: /usr/share/X11/xkb)
+  zlib ................... yes (bundled copy)
+
+NOTE: libxkbcommon and libxkbcommon-x11 0.4.1 or higher not found on the system, will use 
+the bundled version from 3rd party directory.
+Info: creating super cache file /qt5/.qmake.super
